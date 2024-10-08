@@ -8,11 +8,15 @@ public class PlayerStats : MonoBehaviour
     [Header("Current Stats")]
     public float health;
     public float stamina;
+      //for healthbar to lower when damage is taken
+    public HealthBar healthBar;
 
     // === Max Stats ===
     [Header("Max Stats")]
     public float maxHealth = 100f;
     public float maxStamina = 100f;
+
+
 
     // Reference to the Animator component for controlling animations
     private Animator animator;
@@ -22,6 +26,8 @@ public class PlayerStats : MonoBehaviour
         // Initialize health and stamina to their maximum values at the start
         health = maxHealth;
         stamina = maxStamina;
+        //aslo for health bar
+        healthBar.SetMaxHealth(maxHelth);
 
         // Assign the Animator component to animator
         animator = GetComponentInChildren<Animator>();
@@ -48,6 +54,9 @@ public class PlayerStats : MonoBehaviour
 
         // Ensure health does not fall below 0 or exceed max health
         health = Mathf.Clamp(health, 0f, maxHealth);
+
+        // so health bar is updated
+        healthBar.SetHealth(health);
     }
 
     // Method to regenerate stamina over time
